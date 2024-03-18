@@ -25,6 +25,7 @@ pipeline{
     stage('create a new file secret/secret.json'){
         steps{
                 sh 'mkdir secrets'
+                sh 'ls -lh'
                 sh 'echo $secret > secrets/secrets.json'
         }
     }
