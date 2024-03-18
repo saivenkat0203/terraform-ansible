@@ -15,9 +15,9 @@ pipeline {
                 dir('terraform') {
                     // sh 'mkdir -p secrets'
                     // sh 'base64 $secret | base64 --decode > secrets.json'
-                    // sh 'echo $secret | base64 --decode > secrets.json'
-                    // sh 'chmod 777 secrets.json'
-                    // sh 'cat secrets.json'
+                    sh 'echo $secret | base64 --decode > secrets.json'
+                    sh 'chmod 777 secrets.json'
+                    sh 'cat secrets.json'
                 }
             }
         }
@@ -50,21 +50,21 @@ pipeline {
     }
 
     post {
-        // always {
-        //     // clean up
-        //     dir('terraform') {
-        //         sh 'rm -rf .terraform'
-        //         sh 'rm -rf secrets'
-        //     }
+        always {
+            // clean up
+            dir('terraform') {
+                sh 'rm -rf .terraform'
+                sh 'rm -rf secrets'
+            }
 
-        //     // clean up
-        //     dir('terraform') {
-        //         sh 'rm -rf .terraform'
-        //         sh 'rm -rf secrets.json'
-        //     }
+            // clean up
+            dir('terraform') {
+                sh 'rm -rf .terraform'
+                sh 'rm -rf secrets.json'
+            }
 
 
-        // }
+        }
         success {
             echo "========pipeline executed successfully ========"
         }
