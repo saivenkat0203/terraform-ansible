@@ -51,7 +51,19 @@ pipeline {
 
     post {
         always {
-            echo "========always========"
+            // clean up
+            dir('terraform') {
+                sh 'rm -rf .terraform'
+                sh 'rm -rf secrets'
+            }
+
+            // clean up
+            dir('terraform') {
+                sh 'rm -rf .terraform'
+                sh 'rm -rf secrets.json'
+            }
+
+
         }
         success {
             echo "========pipeline executed successfully ========"
