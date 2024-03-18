@@ -50,21 +50,21 @@ pipeline {
     }
 
     post {
-        always {
-            // clean up
-            dir('terraform') {
-                sh 'rm -rf .terraform'
-                sh 'rm -rf secrets'
-            }
+        // always {
+        //     // clean up
+        //     dir('terraform') {
+        //         sh 'rm -rf .terraform'
+        //         sh 'rm -rf secrets'
+        //     }
 
-            // clean up
-            dir('terraform') {
-                sh 'rm -rf .terraform'
-                sh 'rm -rf secrets.json'
-            }
+        //     // clean up
+        //     dir('terraform') {
+        //         sh 'rm -rf .terraform'
+        //         sh 'rm -rf secrets.json'
+        //     }
 
 
-        }
+        // }
         success {
             echo "========pipeline executed successfully ========"
         }
