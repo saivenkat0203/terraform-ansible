@@ -6,18 +6,18 @@ pipeline {
     }
 
     environment {
-        secret = credentials('terraform-secret')
+        secret = credentials('terraform-key')
     }
 
     stages {
         stage('create a new file secret/secret.json') {
             steps {
                 dir('terraform') {
-                    sh 'mkdir -p secrets'
-                                        sh 'base64 $secret | base64 --decode > secrets/secrets.json'
-
-                    sh 'chmod 777 secrets/secrets.json'
-                    sh 'cat secrets/secrets.json'
+                    // sh 'mkdir -p secrets'
+                    // sh 'base64 $secret | base64 --decode > secrets/secrets.json'
+                    sh 'base64 $secret | base64 --decode > secrets.json'
+                    sh 'chmod 777 secrets.json'
+                    sh 'cat secrets.json'
                 }
             }
         }
@@ -34,6 +34,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 dir('terraform') {
+                    sh 'cat secrets/secrets.json'
                     sh 'terraform plan'
                 }
             }
