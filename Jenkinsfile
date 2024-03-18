@@ -6,6 +6,10 @@ pipeline{
         terraform 'Terraform'
     }
 
+    environment{
+        secret = credentials('terraform-secret')
+    }
+
 // run terraform code 
     stages{
 
@@ -16,8 +20,13 @@ pipeline{
             sh 'cd terraform'
         }
     }
-
     
+    stage('create a new file secret/secret.json'){
+        steps{
+                sh 'echo $secret > secrets/secrets.json'
+        }
+    }
+
 
         stage('Terraform Init'){
             steps{
