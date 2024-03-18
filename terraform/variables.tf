@@ -135,3 +135,9 @@ SCRIPT
     source_ranges    = ["0.0.0.0/0"]
   }
 }
+
+variable "credentials_path" {
+  description = "Path to the service account key file"
+  type        = string
+  default     = "secrets/secrets.json"
+}
