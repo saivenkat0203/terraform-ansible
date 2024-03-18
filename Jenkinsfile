@@ -15,7 +15,7 @@ pipeline {
                 dir('terraform') {
                     sh 'mkdir -p secrets'
                     sh 'echo $secret > secrets/secrets.json'
-                    sh 'sudo chmod 777 secrets/secrets.json'
+                    sh 'chmod 777 secrets/secrets.json'
                     sh 'cat secrets/secrets.json'
                 }
             }
