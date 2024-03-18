@@ -14,7 +14,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     // sh 'mkdir -p secrets'
-                    // sh 'base64 $secret | base64 --decode > secrets/secrets.json'
+                    // sh 'base64 $secret | base64 --decode > secrets.json'
                     sh 'base64 $secret | base64 --decode > secrets.json'
                     sh 'chmod 777 secrets.json'
                     sh 'cat secrets.json'
@@ -34,7 +34,7 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 dir('terraform') {
-                    sh 'cat secrets/secrets.json'
+                    sh 'cat secrets.json'
                     sh 'terraform plan'
                 }
             }
