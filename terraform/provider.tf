@@ -7,7 +7,7 @@ terraform {
   }
 
   backend "gcs" {
-    bucket = "bucket-tf-state-lock"
+    bucket = "bucket-tf-ish"
     prefix = "terraform/state"
 
   }
