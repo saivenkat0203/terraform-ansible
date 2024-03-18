@@ -15,37 +15,37 @@ pipeline{
 
     //    cd terraform
 
-    stage('cd terraform'){
-        steps{
-            sh 'terraform --version'
-            sh 'cd terraform'
-        }
-    }
+    // stage('cd terraform'){
+    //     steps{
+    //         sh 'cd terraform'
+    //     }
+    // }
     
 
     stage('create a new file secret/secret.json'){
         steps{
-                sh 'ls -lh'
-                sh 'mkdir -p secrets'
-                sh 'ls -lh'
+                 sh 'cd terraform' 
+                 sh 'mkdir -p secrets'
                 sh 'echo $secret > secrets/secrets.json'
-            sh 'ls -lh'
         }
     }
 
 
         stage('Terraform Init'){
             steps{
+                 sh 'cd terraform'
                 sh 'terraform init'
             }
         }
         stage('Terraform Plan'){
             steps{
+                 sh 'cd terraform'
                 sh 'terraform plan'
             }
         }
         stage('Terraform Apply'){
             steps{
+                 sh 'cd terraform'
                 sh 'terraform apply -auto-approve'
             }
         }
