@@ -1,5 +1,5 @@
 module "my_instance" {
-  source          = "./modules/vm-firewall"
+  source = "./modules/vm-firewall"
   # instance_config = var.default-instance_config
   # instance_config = terraform.workspace == "dev" ? var.dev-instance_config : var.deploy-instance_config
   instance_config = var.deploy-instance_config
