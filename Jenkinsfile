@@ -1,63 +1,57 @@
-
-pipeline{
+pipeline {
     agent any
 
-    tools{
+    tools {
         terraform 'Terraform'
     }
 
-    environment{
+    environment {
         secret = credentials('terraform-secret')
     }
 
-// run terraform code 
-    stages{
-
-    //    cd terraform
-
-    // stage('cd terraform'){
-    //     steps{
-    //         sh 'cd terraform'
-    //     }
-    // }
-    
-
-    stage('create a new file secret/secret.json'){
-        steps{
-                 sh 'cd terraform' 
-                 sh 'mkdir -p secrets'
-                sh 'echo $secret > secrets/secrets.json'
-        }
-    }
-
-
-        stage('Terraform Init'){
-            steps{
-                 sh 'cd terraform'
-                sh 'terraform init'
+    stages {
+        stage('create a new file secret/secret.json') {
+            steps {
+                dir('terraform') {
+                    sh 'mkdir -p secrets'
+                    sh 'echo $secret > secrets/secrets.json'
+                }
             }
         }
-        stage('Terraform Plan'){
-            steps{
-                 sh 'cd terraform'
-                sh 'terraform plan'
+
+        stage('Terraform Init') {
+            steps {
+                dir('terraform') {
+                    sh 'terraform init'
+                }
             }
         }
-        stage('Terraform Apply'){
-            steps{
-                 sh 'cd terraform'
-                sh 'terraform apply -auto-approve'
+
+        stage('Terraform Plan') {
+            steps {
+                dir('terraform') {
+                    sh 'terraform plan'
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                dir('terraform') {
+                    sh 'terraform apply -auto-approve'
+                }
             }
         }
     }
-    post{
-        always{
+
+    post {
+        always {
             echo "========always========"
         }
-        success{
+        success {
             echo "========pipeline executed successfully ========"
         }
-        failure{
+        failure {
             echo "========pipeline execution failed========"
         }
     }
