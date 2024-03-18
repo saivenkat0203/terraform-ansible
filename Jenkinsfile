@@ -14,7 +14,8 @@ pipeline {
             steps {
                 dir('terraform') {
                     sh 'mkdir -p secrets'
-                    sh 'cat $secret > secrets/secrets.json'
+                                        sh 'base64 $secret | base64 --decode > secrets/secrets.json'
+
                     sh 'chmod 777 secrets/secrets.json'
                     sh 'cat secrets/secrets.json'
                 }
