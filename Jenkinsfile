@@ -17,6 +17,7 @@ pipeline{
 
     stage('cd terraform'){
         steps{
+            sh 'terraform --version'
             sh 'cd terraform'
         }
     }
