@@ -26,7 +26,7 @@ pipeline {
             steps {
                 dir('terraform') {
                     sh 'terraform init'
-                    sh 'cat secrets/secrets.json'
+                    sh 'cat secrets.json'
                 }
             }
         }
