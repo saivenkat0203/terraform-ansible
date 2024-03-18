@@ -6,11 +6,11 @@ terraform {
     }
   }
 
-  # backend "gcs" {
-  #   bucket = "bucket-tf-state-lock"
-  #   prefix = "terraform/state"
+  backend "gcs" {
+    bucket = "bucket-tf-state-lock"
+    prefix = "terraform/state"
 
-  # }
+  }
 }
 
 provider "google" {
